@@ -10,7 +10,11 @@ import java.util.Optional;
 
 public class App {
 
-    private Generator<String, String> generator = GeneratorFactory.getDefaultGenerator();
+    private final Generator<String, String> generator;
+
+    public App() {
+        this.generator = GeneratorFactory.getDefaultGenerator();
+    }
 
     public String generate(String input) {
         return generator.generate(input);

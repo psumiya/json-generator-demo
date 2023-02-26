@@ -14,4 +14,4 @@ Then you can see some sample generated json strings emitted by tests at the foll
 
 See link:app/build.gradle[build.gradle] file for how to add the dependency.
 
-You need to use your GitHub user and a personal access token on your system to download the dependency.
+You will need to use your GitHub user and a personal access token on your system to build this project. The token is used by build gradle script to download the dependency from github, as documented here regarding link:https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#using-a-published-package[Using a published package] from GitHub Packages Gradle Registry.

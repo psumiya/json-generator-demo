@@ -1,0 +1,17 @@
+= Json Generator Demo
+
+This repo shows how to add json-generator library (link:https://github.com/psumiya/json-generator[view GitHub repo]) as a dependency in a project.
+
+`json-generator` is published as a github package, and not to Maven Central, so the steps are slightly different.
+
+== Run this Project
+
+This project is set up using Gradle 7.6 and JDK 19.
+
+Clone the project, then run `./gradlew clean build` at the root.
+
+Then you can see some sample generated json strings emitted by tests at the following location: build/reports/tests/test/classes/json.generator.demo.AppTest.html
+
+See link:app/build.gradle[build.gradle] file for how to add the dependency.
+
+You need to use your GitHub user and a personal access token on your system to download the dependency.

@@ -3,8 +3,15 @@
  */
 package json.generator.demo;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Named;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class AppTest {
 
@@ -16,6 +23,16 @@ class AppTest {
              "firstName": "alpha",
              "lastName": "beta"
             }""";
+
+    private static final String BOOKS = """
+            [
+                {
+                    "genre": "reference",
+                    "author": "Nigel Rees",
+                    "title": "Sayings of the Century",
+                    "price": 8.95
+                }
+            ]""";
 
     private static final String NESTED_JSON = """
             {
@@ -102,30 +119,26 @@ class AppTest {
               "currencyName": "US Dollars"
             }""";
 
-    private static App classUnderTest = new App();
+    private static final App classUnderTest = new App();
 
-    @Test void appDemoHello() {
-        String generated = classUnderTest.generate(HELLO);
-        assertNotNull(generated, "app should generate a randomized json. randomizedJson=" + generated);
-        System.out.println(generated);
+    static Stream<Arguments> jsonInputProvider() {
+        return Stream.of(
+                arguments(Named.of("HELLO", HELLO)),
+                arguments(Named.of("NAMES", NAMES)),
+                arguments(Named.of("BOOKS", BOOKS)),
+                arguments(Named.of("NESTED_JSON", NESTED_JSON)),
+                arguments(Named.of("WITH_SPEC", WITH_SPEC))
+        );
     }
 
-    @Test void appDemoNames() {
-        String generated = classUnderTest.generate(NAMES);
+    @ParameterizedTest
+    @MethodSource("jsonInputProvider")
+    void appDemo(String jsonInput) {
+        String generated = classUnderTest.generate(jsonInput);
         assertNotNull(generated, "app should generate a randomized json. randomizedJson=" + generated);
-        System.out.println(generated);
-    }
-
-    @Test void appDemoNestedJson() {
-        String generated = classUnderTest.generate(NESTED_JSON);
-        assertNotNull(generated, "app should generate a randomized json. randomizedJson=" + generated);
-        System.out.println(generated);
-    }
-
-    @Test void appDemoWithSpec() {
-        String generated = classUnderTest.generate(WITH_SPEC);
-        assertNotNull(generated, "app should generate a randomized json. randomizedJson=" + generated);
-        System.out.println(generated);
+        System.out.println("Input::\n" + jsonInput);
+        System.out.println("Output::\n" + generated);
+        System.out.println("========\n");
     }
 
 }

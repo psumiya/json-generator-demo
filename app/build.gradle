@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
     // This dependency is used by the application.
-    implementation 'json-generator:json-generator:0.0.2'
+    implementation 'json-generator:json-generator:0.0.3'
 }
 
 application {
